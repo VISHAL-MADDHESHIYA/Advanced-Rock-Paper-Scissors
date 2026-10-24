@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="A polished, responsive Rock Paper Scissors arena with streaks, stats, themes and sound controls." />
+  <title>RPS Arena — Rock Paper Scissors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="RPS Arena home"><span class="brand-mark">✳</span><span>RPS<span class="brand-muted">/ARENA</span></span></a>
+      <div class="top-actions">
+        <span class="status-pill"><span class="status-dot"></span> SYSTEM ONLINE</span>
+        <button class="icon-button" id="soundToggle" aria-label="Toggle sound" title="Toggle sound">♫</button>
+        <button class="icon-button" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☼</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> QUICK MATCH <span class="eyebrow-dot">/</span> NO. <span id="matchNumber">001</span></p>
+        <h1>Make your <span>move.</span></h1>
+        <p class="hero-subtitle">Three choices. One winner. Think fast, play smart, and build your streak.</p>
+      </div>
+      <div class="level-card">
+        <span class="level-icon">↗</span><div><small>YOUR RANK</small><strong id="rankName">Rookie</strong></div>
+        <div class="level-progress"><span id="rankProgress"></span></div>
+        <small id="xpLabel">0 / 100 XP</small>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Game statistics">
+      <article class="stat-card"><span class="stat-label">WINS</span><strong id="wins">0</strong><span class="stat-foot positive">↗ Victories</span></article>
+      <article class="stat-card"><span class="stat-label">WIN RATE</span><strong id="winRate">0<span class="stat-unit">%</span></strong><span class="stat-foot">Of completed rounds</span></article>
+      <article class="stat-card"><span class="stat-label">CURRENT STREAK</span><strong id="streak">0 <span class="streak-flame">✦</span></strong><span class="stat-foot">Best: <b id="bestStreak">0</b></span></article>
+      <article class="stat-card"><span class="stat-label">TOTAL ROUNDS</span><strong id="rounds">0</strong><span class="stat-foot">Keep it going</span></article>
+    </section>
+
+    <section class="game-layout">
+      <div class="game-panel panel">
+        <div class="panel-heading"><div><p class="eyebrow">THE ARENA</p><h2>Choose your weapon</h2></div><span class="round-chip">ROUND <b id="roundNumber">01</b></span></div>
+        <div class="battlefield">
+          <div class="fighter">
+            <div class="fighter-label"><span class="fighter-dot you-dot"></span> YOU</div>
+            <div class="fighter-orb" id="playerOrb"><span id="playerMove" class="move-emoji">?</span></div>
+            <span class="fighter-move" id="playerLabel">Awaiting move</span>
+          </div>
+          <div class="versus"><span>VS</span><i></i></div>
+          <div class="fighter">
+            <div class="fighter-label"><span class="fighter-dot cpu-dot"></span> CPU <span class="cpu-badge">AI</span></div>
+            <div class="fighter-orb cpu-orb" id="cpuOrb"><span id="cpuMove" class="move-emoji">?</span></div>
+            <span class="fighter-move" id="cpuLabel">Thinking...</span>
+          </div>
+        </div>
+        <div class="result-banner" id="resultBanner" role="status" aria-live="polite"><span class="result-symbol">✦</span><div><strong id="resultTitle">Ready when you are</strong><p id="resultText">Pick a move below to start the match.</p></div></div>
+        <div class="choice-area">
+          <p class="choice-prompt">MAKE YOUR MOVE <span>— SELECT ONE</span></p>
+          <div class="choices">
+            <button class="choice-button" data-choice="rock"><span class="choice-emoji">✊</span><span class="choice-name">Rock</span><span class="choice-key">01</span></button>
+            <button class="choice-button" data-choice="paper"><span class="choice-emoji">✋</span><span class="choice-name">Paper</span><span class="choice-key">02</span></button>
+            <button class="choice-button" data-choice="scissors"><span class="choice-emoji">✌️</span><span class="choice-name">Scissors</span><span class="choice-key">03</span></button>
+          </div>
+        </div>
+        <div class="game-footer"><span><span class="live-dot"></span> MATCH IN PROGRESS</span><button id="resetButton" class="text-button">↻ Reset stats</button></div>
+      </div>
+
+      <aside class="side-column">
+        <section class="panel challenge-panel">
+          <div class="panel-heading compact"><div><p class="eyebrow">DAILY CHALLENGE</p><h2>Triple threat</h2></div><span class="challenge-icon">⌁</span></div>
+          <p class="challenge-description">Win 3 rounds in a row to complete today's challenge.</p>
+          <div class="challenge-progress-row"><span>Progress</span><strong id="challengeCount">0 / 3</strong></div>
+          <div class="progress-track"><span id="challengeProgress"></span></div>
+          <div class="challenge-reward"><span>✦</span><div><strong>+50 bonus XP</strong><small id="challengeStatus">Challenge not completed</small></div></div>
+        </section>
+        <section class="panel history-panel">
+          <div class="panel-heading compact"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Match history</h2></div><span class="history-count" id="historyCount">0 / 6</span></div>
+          <div class="history-list" id="historyList"><div class="empty-history"><span>⌁</span><p>Your recent rounds will appear here.</p></div></div>
+        </section>
+        <section class="tip-card"><span class="tip-icon">◎</span><div><strong>Pro tip</strong><p>There is no guaranteed winning move. Mix up your choices and trust your instincts.</p></div></section>
+      </aside>
+    </section>
+    <footer class="site-footer"><span>RPS/ARENA <span class="footer-separator">•</span> BUILT FOR THE BOLD</span><span>LOCAL STATS <span class="footer-separator">•</span> YOUR DATA STAYS HERE</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
