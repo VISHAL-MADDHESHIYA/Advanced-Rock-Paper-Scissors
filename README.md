@@ -2,6 +2,9 @@
 
 A responsive, polished Rock Paper Scissors game built with **HTML, CSS and vanilla JavaScript**. No frameworks, build step, API key, or backend required.
 
+* **Live Deployment:**  https://vishal-maddheshiya.github.io/Advanced-Rock-Paper-Scissors/
+* **GitHub Repository:** https://github.com/VISHAL-MADDHESHIYA/Advanced-Rock-Paper-Scissors
+
 ## Features
 - Responsive arena UI with dark and light themes
 - Rock / Paper / Scissors buttons plus keyboard shortcuts (`1`, `2`, `3`, or `R`, `P`, `S`)
